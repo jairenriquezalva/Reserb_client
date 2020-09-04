@@ -1,13 +1,12 @@
 import React from 'react';
 import {useState} from 'react';
 import styled from 'styled-components'
+import { useHistory } from "react-router-dom";
 
-const SignUpLayout = styled.div`
-    height: ${props=>props.height}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+import configuration from 'configuration'
+import routes from 'routes'
+import CenteredLayout from 'components/CenteredLayout'
+
 
 const FormContainer = styled.form`
     display: flex;
@@ -15,8 +14,9 @@ const FormContainer = styled.form`
     align-items: center;
     justify-content: space-evenly;
     height: 600px;
-    width: 800px;
+    width: 400px;
     padding: 20px;
+    border: 1px solid lightgray;
 `
 
 const Submit = styled.input.attrs(_=>({type: 'submit'}))`
@@ -39,22 +39,23 @@ const InputGroup = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-`
 
+`
 const Title = styled.h1`
     margin: 0.5em;
 `
 
 const Signup = (props)=>{
 
-    const [email,setEmail] = useState();
-    const [password,setPassword] = useState();
-    const [forenames,setForenames] = useState();
-    const [surnames, setSurnames] = useState();
-    const [birthdate, setBirthdate] = useState();
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [forenames,setForenames] = useState("");
+    const [surnames, setSurnames] = useState("");
+    const [birthdate, setBirthdate] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState();
 
+    const history = useHistory();
 
     const setEventValue = (setter,event)=>{
         setter(event.target.value);
@@ -86,26 +87,42 @@ const Signup = (props)=>{
         valid = /^\w+$/.test(email) && valid;
         valid = /^\w+$/.test(password) && valid;
         setError(!valid);
-        setErrorMessage('no se pudo crear el usuario. Es posible que el correo ya se encuentre registrado.')
-        alert(`
-        email: ${email}
-        password: ${password}
-        valid: ${valid}
-        `)
+        setErrorMessage('No se pudo crear el usuario. Es posible que el correo ya se encuentre registrado.') 
+        let data = {
+            eMail: email,
+            password: password,
+            forenames: forenames,
+            surnames: surnames,
+            birthdate: birthdate
+        }
+        console.log(data)
+        fetch(configuration.apiBaseUrl+"customer",{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data=>
+            {
+                if(data.status==="success")
+                    history.push(routes.login)
+            })
     }
 
     return (
-        <SignUpLayout height={props.height}>
+        <CenteredLayout height={props.height}>
             <FormContainer onSubmit={handleSubmit}>
                 <Title>Reserb Signup</Title>
-                {error?<label>No se puedo crear el usuario : <code>{errorMessage}</code></label>:<div></div>}
+                {error?<div><label>No se puedo crear el usuario:</label><br/><code style={{fontSize: '15px', color: 'red'}}>{errorMessage}</code></div>:<div></div>}
                 <InputGroup>
                     <label>Correo electronico</label>
                     <input type="text" onKeyUp={handleEmailInput}/>
                 </InputGroup>
                 <InputGroup>
                     <label>Contraseña</label>
-                    <input tyinputpe="password" onKeyUp={handlePasswordInput}/>
+                    <input type="password" onKeyUp={handlePasswordInput}/>
                 </InputGroup>
                 <InputGroup>
                     <label>Nombres</label>
@@ -119,9 +136,9 @@ const Signup = (props)=>{
                     <label>Fecha de nacimiento</label>
                     <input type="text" onKeyUp={handleBirthdateInput}/>
                 </InputGroup>
-                <Submit value="Registrar"/>
+                <Submit value="Registrar" style={{marginTop: '1.5em'}}/>
             </FormContainer>
-        </SignUpLayout>
+        </CenteredLayout>
     )
 }
 
