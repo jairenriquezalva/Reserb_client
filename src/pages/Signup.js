@@ -1,51 +1,27 @@
 import React from 'react';
 import {useState} from 'react';
 import styled from 'styled-components'
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import {useAlert} from 'react-alert'
 
+import CenteredLayout from 'components/CenteredLayout'
+import FormContainer from 'components/FormContainer'
+import Title from 'components/Title'
+import RInput from 'components/RInput'
 import configuration from 'configuration'
 import routes from 'routes'
-import CenteredLayout from 'components/CenteredLayout'
-
-
-const FormContainer = styled.form`
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 600px;
-    width: 400px;
-    padding: 20px;
-    border: 1px solid lightgray;
-`
-
-const Submit = styled.input.attrs(_=>({type: 'submit'}))`
-    padding: 0.5em 1em;
-    background-color: var(--main-bg-color);
-    outline: none;
-    border: none;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    transition: box-shadow 0.5s;
-    &:hover {
-        box-shadow: inset 0 0 3px 2px white;
-    }
-`
 
 const InputGroup = styled.div`
     height: 55px;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-
-`
-const Title = styled.h1`
-    margin: 0.5em;
 `
 
 const Signup = (props)=>{
+
+    const alert = useAlert();
+    const history = useHistory();
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -54,9 +30,7 @@ const Signup = (props)=>{
     const [birthdate, setBirthdate] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState();
-
-    const history = useHistory();
-
+    
     const setEventValue = (setter,event)=>{
         setter(event.target.value);
     }
@@ -81,13 +55,7 @@ const Signup = (props)=>{
         setEventValue(setBirthdate,event)
     }
 
-    const handleSubmit = (event)=>{
-        event.preventDefault()
-        let valid = true;
-        valid = /^\w+$/.test(email) && valid;
-        valid = /^\w+$/.test(password) && valid;
-        setError(!valid);
-        setErrorMessage('No se pudo crear el usuario. Es posible que el correo ya se encuentre registrado.') 
+    const signupRequest = ()=>{
         let data = {
             eMail: email,
             password: password,
@@ -106,9 +74,27 @@ const Signup = (props)=>{
         .then(response => response.json())
         .then(data=>
             {
-                if(data.status==="success")
-                    history.push(routes.login)
+                if(data.status==="success"){
+                    setTimeout(_=>history.push(routes.login),2000)
+            alert.info("Usuario creado satisfactoriamente")
+                }
+                else
+                    throw new Error()
             })
+        .catch(err=>{
+            alert.error('Contacte con el administrador!');
+        })
+    }
+
+    const handleSubmit = (event)=>{
+        event.preventDefault()
+        let valid = true;
+        valid = /^\w+@\w+.\w+$/.test(email) && valid;
+        valid = /^\w+$/.test(password) && valid;
+        setError(!valid);
+        setErrorMessage('No se pudo crear el usuario. Es posible que el correo ya se encuentre registrado.') 
+        if(valid)
+        signupRequest()        
     }
 
     return (
@@ -136,7 +122,7 @@ const Signup = (props)=>{
                     <label>Fecha de nacimiento</label>
                     <input type="text" onKeyUp={handleBirthdateInput}/>
                 </InputGroup>
-                <Submit value="Registrar" style={{marginTop: '1.5em'}}/>
+                <RInput type='submit' value="Registrar" style={{marginTop: '1.5em'}}/>
             </FormContainer>
         </CenteredLayout>
     )
