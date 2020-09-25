@@ -63,7 +63,6 @@ const Signup = (props)=>{
             surnames: surnames,
             birthdate: birthdate
         }
-        console.log(data)
         fetch(configuration.apiBaseUrl+"customer",{
             method: 'POST',
             headers: {

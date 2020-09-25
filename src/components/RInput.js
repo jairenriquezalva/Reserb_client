@@ -4,7 +4,7 @@ const RInput = styled.input`
     font-size: 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     ${props=>{
-        if(props.type == 'submit')
+        if(props.type === 'submit')
             return `padding: 0.5em 1em;
                 background-color: var(--main-bg-color);
                 outline: none;
@@ -13,7 +13,7 @@ const RInput = styled.input`
                 font-size: 24px;
                 font-weight: bold;
                 color: white;
-                    cursor: pointer;
+                cursor: pointer;
                 transition: box-shadow 0.5s;
                 &:hover {
                     box-shadow: inset 0 0 3px 1px black;

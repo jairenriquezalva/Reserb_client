@@ -10,11 +10,12 @@ import RInput from 'components/RInput'
 //js objects
 import configuration from 'configuration'
 import routes from 'routes'
-import sessionData from 'sessionData'
+import { useSession } from 'hooks/Session';
 
 
 const Login = (props) => {
 
+    const session = useSession();
     const alert = useAlert();
     const history = useHistory();
     
@@ -50,7 +51,7 @@ const Login = (props) => {
             {
                 if(data.status==="success"){
                     setTimeout(_=>history.push(routes.home),2000)
-                    sessionData.email = data.customer.eMail;
+                    session.setSessionData(data.customer.eMail);
                     alert.info("Se ha iniciado sesion correctamente.")
                 }
                 else

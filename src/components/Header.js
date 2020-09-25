@@ -6,6 +6,9 @@ import {
 
 import routes from 'routes'
 
+import Dropdown from 'components/Dropdown'
+import DropdownItem from 'components/DropdownItem'
+
 const HeaderContainer = styled.header`
     height: ${props=>props.height}px;
     display: flex;
@@ -40,12 +43,14 @@ const Header = (props)=>{
             <h1>ReserB</h1>
             <nav>
                 <NavigatorLinkContainer>
-                    <li>
-                        <MyLink to={routes.login}>Login</MyLink>
-                    </li>
-                    <li>
-                        <MyLink to={routes.signup}>Sign Up</MyLink>
-                    </li>
+                    <Dropdown>
+                        <DropdownItem>
+                            <MyLink to={routes.login}>Login</MyLink>
+                        </DropdownItem>
+                        <DropdownItem>
+                            <MyLink to={routes.signup}>Sign Up</MyLink> 
+                        </DropdownItem>
+                    </Dropdown>
                 </NavigatorLinkContainer>
             </nav>
         </HeaderContainer>

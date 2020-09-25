@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const CenteredLayout = styled.div`
     height: ${props=>props.height}px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 `
