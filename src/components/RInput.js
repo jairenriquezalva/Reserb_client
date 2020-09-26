@@ -9,7 +9,7 @@ const RInput = styled.input`
                 background-color: var(--main-bg-color);
                 outline: none;
                 border: none;
-                border-radius: 3px;
+                1border-radius: 3px;
                 font-size: 24px;
                 font-weight: bold;
                 color: white;
