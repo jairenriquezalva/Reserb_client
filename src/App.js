@@ -10,20 +10,20 @@ import 'App.css'
 import routes from 'routes'
 
 import Header from 'components/header/Header'
+import Profile from 'pages/Profile'
 import Home from 'pages/Home';
 import Login from 'pages/Login';
 import Signup from 'pages/Signup';
 
 function App() {
-  const headerHeight = 120;
-  const bodyHeight = window.innerHeight-headerHeight;
   return (
     <Router>
-      <Header height={headerHeight}/>
+      <Header />
       <Switch>
         <Route path={routes.home}><Home/></Route>
-        <Route path={routes.signup}><Signup height={bodyHeight}/></Route>
-        <Route path={routes.login}><Login height={bodyHeight}/></Route>
+        <Route path={routes.profile}><Profile/></Route>
+        <Route path={routes.signup}><Signup/></Route>
+        <Route path={routes.login}><Login/></Route>
       </Switch>
     </Router>
   );

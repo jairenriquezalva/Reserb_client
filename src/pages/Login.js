@@ -68,7 +68,7 @@ const Login = (props) => {
     }
 
     return (
-        <CenteredLayout height={props.height}>
+        <CenteredLayout >
             <FormContainer onSubmit={submit}>
                 <Title>Log in now</Title>
                 <RLabel>Email</RLabel>

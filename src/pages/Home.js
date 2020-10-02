@@ -25,7 +25,7 @@ const Home = () => {
         }
     })
     return (
-    <CenteredLayout>
+    <CenteredLayout scrolleable={true}>
         <div>
             <h2 style={{marginTop: '2.5em',marginLeft: '2.5em'}}>Elija el rubro de su preferencia .. </h2>
             <RGrid>
