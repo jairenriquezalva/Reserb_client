@@ -12,7 +12,6 @@ const StyledCenteredLayout = styled.div`
 const CenteredLayout = (props)=>{
     const ref = useRef(null);
     const [height, setHeight] = useState();
-    const [,updateState] = useState();
 
     const calculateheight = ()=>{
         setHeight(window.innerHeight-ref.current.getBoundingClientRect().y)

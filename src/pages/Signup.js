@@ -4,10 +4,14 @@ import styled from 'styled-components'
 import {useHistory} from "react-router-dom";
 import {useAlert} from 'react-alert'
 
+//components
 import CenteredLayout from 'components/CenteredLayout'
 import FormContainer from 'components/FormContainer'
 import Title from 'components/Title'
 import RInput from 'components/RInput'
+import DefaultLink from 'components/DefaultLink'
+
+//js files
 import configuration from 'configuration'
 import routes from 'routes'
 
@@ -122,6 +126,10 @@ const Signup = (props)=>{
                     <input type="text" onKeyUp={handleBirthdateInput}/>
                 </InputGroup>
                 <RInput type='submit' value="Registrar" style={{marginTop: '1.5em'}}/>
+                <span style={{fontSize: "14px"}}>
+                    Ya tienes usuario?
+                    <DefaultLink onClick={_=>history.push(routes.login)}>Login</DefaultLink>
+                </span>
             </FormContainer>
         </CenteredLayout>
     )

@@ -1,9 +1,16 @@
 import React, { createContext , useContext, useState } from 'react'
 
+import sessionStorageManager from 'hooks/sessionStorageManager'
+
 const SessionContext = createContext();
 
 const SessionProvider = (props)=>{
-    const [sessionData, setSessionData] = useState();
+    const [sessionData, setSessionDataTemp] = useState(sessionStorageManager.data);
+
+    const setSessionData = (data)=>{
+        setSessionDataTemp(data);
+        sessionStorageManager.data = data;
+    }
 
     return (
         <SessionContext.Provider value={{sessionData,setSessionData}}>

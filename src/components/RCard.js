@@ -5,41 +5,49 @@ const FormatedImage = styled.img`
     display: block;
     width: inherit;
     height: 200px;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border: 2px solid lightgray;
-    box-sizing: content-box;
+    box-sizing: border-box;
     position: relative;
-    left: -2px;
-    top: 2px;
 `
 
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 2px solid lightgray;
-    box-shadow: 0 1px 1px lightgray; 
     width: 300px;
     margin: 1em;
     border-radius: 4px;
+    box-shadow: 0 0px 2px 1px lightgray; 
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 const ContentContainer = styled.div`
     margin: 0 15px;
+    color: gray;    
+    font-size: 15px;
+`
+
+const CardHeader = styled.div`
+    padding: 0.5em;
+    font-weight: bold;
+    color: var(--main-color);
+    transition: background 0.5s, color 0.5s;
+    background: var(--main-bg-color);
+    ${CardContainer}:hover & {
+        background: var(--secondary-bg-color);
+        color: var(--secondary-color);
+    }
 `
 
 const RCard = (props)=>{
     return (
-        <CardContainer>
-               <h3 style={{background: 'var(--main-bg-color)', padding: '1em',color: 'white', margin: 0}}>{props.src.name}</h3>
-            <ContentContainer>
-                <p>Descripcion lo</p>
-                <p>Descripcion lo</p>
-                <p>Descripcion lo</p>
-                <h5 style={{background: 'white'}}>Tiempo minimo de reserva: {props.src.reserveDuration} hs.</h5>
-            </ContentContainer>
+        <CardContainer onClick={props.action}>
+            <CardHeader>{props.src.name}</CardHeader>
             <FormatedImage src={props.src.image}/>
+            <ContentContainer>
+                <p>Tiempo minimo de reserva: {props.src.reserveDuration} hs.</p>
+            </ContentContainer>
         </CardContainer>
     )
 }

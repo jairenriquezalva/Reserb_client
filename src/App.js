@@ -14,6 +14,7 @@ import Profile from 'pages/Profile'
 import Home from 'pages/Home';
 import Login from 'pages/Login';
 import Signup from 'pages/Signup';
+import Category from 'pages/Category';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path={routes.home}><Home/></Route>
         <Route path={routes.profile}><Profile/></Route>
         <Route path={routes.signup}><Signup/></Route>
+        <Route path={routes.category+'/:sectorId'}><Category/></Route>
         <Route path={routes.login}><Login/></Route>
       </Switch>
     </Router>
