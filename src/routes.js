@@ -1,9 +1,10 @@
 const routes = {
     login: '/',
-    home: '/Home',
+    home: '/Sector',
     signup: '/Signup',
     profile: '/Profile',
-    category: '/Category'
+    category: '/Category',
+    space: '/Space'
 }
 
 export default routes;

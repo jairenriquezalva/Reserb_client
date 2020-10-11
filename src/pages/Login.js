@@ -12,8 +12,6 @@ import DefaultLink from 'components/DefaultLink'
 import configuration from 'configuration'
 import routes from 'routes'
 import { useSession } from 'hooks/Session';
-import sessionStorageManager from 'hooks/sessionStorageManager';
-
 
 const Login = (props) => {
 

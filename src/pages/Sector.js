@@ -9,20 +9,20 @@ import RCard from 'components/RCard'
 import configuration from 'configuration'
 import routes from 'routes'
 
-const Home = () => {
+const Sector = () => {
     const alert = useAlert();
     const [sectors,setSectors] = useState([]);
     const history = useHistory();
     useEffect(()=>{
-        if(sectors.length === 0){
             fetch(configuration.apiBaseUrl+'sector', {credentials: 'include' })
             .then(response=> response.json())
             .then(data=>setSectors(data))
             .catch(error=>{
                 alert.error('error de conexion intentelo mas tarde.')
             })
-        }
-    },[])
+        },
+        [alert]
+    )
 
     return (
     <CenteredLayout scrolleable={true}>
@@ -36,4 +36,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Sector;

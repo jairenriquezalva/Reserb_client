@@ -2,7 +2,8 @@
 
 cliente para el software de reservas reserb
 
-<img src="./front.png"/>
+<img src="./screenshots/front.png"/>
+<img src="./screenshots/front2.png"/>
 
 ### Installation
 
