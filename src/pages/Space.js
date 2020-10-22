@@ -33,7 +33,7 @@ const Space = ()=>{
             <div>
                 <h2 style={{marginTop: '2.5em',marginLeft: '2.5em',color: 'gray',fontWeight: 'normal'}}>Estos son los locales que encontramos cerca de tu zona!</h2>
                 <div style={{display: 'flex'}}>
-                    <PlacesMap places={spaces} height={500} width={500} />
+                    <PlacesMap places={spaces} placeCallback={setCurrentSpace} height={500} width={500} />
                     <SpaceDetail space={currentSpace}/>
                 </div>
                 

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
-import GoogleMap from 'typescript/googlemaps'
+import GoogleMap from 'typescript/googlemapsApiWraper'
 
 const PlacesMap = (props) => {
     const [map,setMap] = useState()
     const mapId = "map";
+
     props.places.forEach((place,i) => {
         console.log("place"+i)
         let address = { lat: place.provider.address[1], lng: place.provider.address[0]}
         if(map)
-        map.setLocationMarker(address,place.provider.businessName,()=>console.log("callback"))
+        map.setLocationMarker(address,place.provider.businessName, ()=>props.placeCallback(place))
     });
     useEffect(
         ()=>{
