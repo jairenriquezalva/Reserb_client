@@ -3,7 +3,10 @@
 cliente para el software de reservas reserb
 
 <img src="./screenshots/front.png"/>
+<img src="./screenshots/front3.png"/>
+<img src="./screenshots/front4.png"/>
 <img src="./screenshots/front2.png"/>
+
 
 ### Installation
 
